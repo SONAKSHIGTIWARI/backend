@@ -1,32 +1,13 @@
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
+const container=document.querySelector('.container');
+const registerBtn=document.querySelector('.register-btn');
+const loginBtn=document.querySelector('.login-btn');
+
+registerBtn.addEventListener('click',() =>{
+    container.classList.add('active');
+
 });
 
-// Dynamic skill chart animation
-window.addEventListener('load', () => {
-    const skills = {
-        'html-skill': 90,
-        'css-skill': 85,
-        'js-skill': 75
-    };
-
-    Object.keys(skills).forEach(skill => {
-        const skillElement = document.getElementById(skill);
-        setTimeout(() => {
-            skillElement.style.width = `${skills[skill]}%`;
-        }, 500);
-    });
-});
-
-// Form submission handling (basic)
-document.getElementById('contact-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-    alert('Thank you for reaching out!');
+loginBtn.addEventListener('click',() =>{
+    container.classList.remove('active');
+    
 });
