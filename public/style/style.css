@@ -1,0 +1,54 @@
+/* Background for entry page */
+.entry-bg {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+/* Card styling */
+.entry-card {
+  max-width: 500px;
+  margin: auto;
+  animation: fadeInUp 1s ease;
+}
+
+/* Input focus effect */
+.input-focus:focus {
+  border-color: #0dcaf0;
+  box-shadow: 0 0 10px rgba(13, 202, 240, 0.5);
+}
+
+/* Button animation */
+.entry-btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.entry-btn:hover {
+  background-color: #0bb4d4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(13, 202, 240, 0.5);
+}
+
+/* Title animation */
+.animate-title {
+  animation: glow 2s infinite alternate;
+}
+
+/* Fade in and glow keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px #0dcaf0, 0 0 20px #0dcaf0;
+  }
+  100% {
+    text-shadow: 0 0 20px #0dcaf0, 0 0 30px #0dcaf0;
+  }
+}

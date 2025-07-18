@@ -1,0 +1,19 @@
+.entry{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .enrty-form{
+        background-color: var(--bs-dark);
+        padding: 1rem;
+        border-radius: 14px;
+        width: 50%;
+        height: 50%;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+}
