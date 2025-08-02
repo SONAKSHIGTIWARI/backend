@@ -16,5 +16,5 @@ app.use(express.json())
 app.use("/api", router)
 
 app.listen(port, () => {
-    console.log(`server is running on port ${port}| http://localhost:${port}  !`)
+    console.log(`server is running on port ${port}| http://localhost:${port} !`)
 })
