@@ -1,114 +1,45 @@
-import { technologies } from "../database.js";
+let data = [
+    { name: "Grinning Face", icon: "😀", code: "U+1F600" },
+    { name: "Thumbs Up", icon: "👍", code: "U+1F44D" },
+    { name: "Red Heart", icon: "❤️", code: "U+2764" },
+    { name: "Tears of Joy", icon: "😂", code: "U+1F602" },
+    { name: "Sunglasses", icon: "😎", code: "U+1F60E" },
+    { name: "Thinking Face", icon: "🤔", code: "U+1F914" },
+    { name: "Clapping Hands", icon: "👏", code: "U+1F44F" },
+    { name: "Rocket", icon: "🚀", code: "U+1F680" },
+    { name: "Fire", icon: "🔥", code: "U+1F525" },
+    { name: "Party Popper", icon: "🎉", code: "U+1F389" }
+];
 
-let getRandomTechnology = (req, res) => {
-
-    let randomNumber = Math.round((Math.random() * 49) + 1)
-
-    let data = technologies.filter((technology) => { return randomNumber == technology.id })
-
-    res.status(200).json({ message: "the random technology to learn !", technology: data })
+let getHome = (req, res) => {
+    // res.status(200).json({ message: "this is home page" })
+    res.status(200).render("index", { emojies: data, craetedBy: "Amey Khondekar" })
 }
 
-let getFiltredTechnologies = (req, res) => {
-    let { difficulty } = req.query
+let getAbout = (req, res) => {
+    // res.status(200).json({ message: "this is about page" })
+    res.status(200).render("about")
+}
 
-    let { duration } = req.query
+let getContact = (req, res) => {
+    // res.status(200).json({ message: "this is contact page" })
+    res.status(200).render("contact", { message: "" })
+}
 
-    let { scope } = req.query
+let postContact = (req, res) => {
+    console.log("trying to post data from form")
+    console.log(req.body)
+    res.status(202).render("contact", { message: "data reached the server !" })
+}
 
-    console.log(req.query)
+let addEmoji = (req,res) => {
+    console.log("trying to add emoji")
+    console.log(req.body)
 
-    try {
-        if (!difficulty && !duration && !scope) {
-            throw ("invalid request please set difficulty/duration parameters !")
-        }
+    data = [...data, req.body]
 
-        let data = technologies
-
-        if (difficulty) {
-            data = data.filter((technology) => {
-                return technology.difficulty.toLowerCase() == difficulty.toLowerCase()
-            })
-        }
-
-        if (duration) {
-            data = data.filter((technology) => {
-                return technology.duration == duration
-            })
-        }
-
-        if (scope) {
-            data = data.filter((technology) => {
-                return technology.scope.some((item) => {
-                    return item.toLowerCase() === scope.toLowerCase()
-                }
-                )
-            })
-        }
-
-        if (data.length < 1) {
-            throw ("data not found !")
-        }
-
-        res.status(200).json({ message: "data you were requesting !", we_got: `${data.length} matching results`, data })
-
-    } catch (err) {
-        res.status(400).json({ message: err })
-    }
+    res.status(202).render("index", { emojies: data, craetedBy: "Amey Khondekar" })
 
 }
 
-
-let getTechnologyBasedOnId = (req, res) => {
-    try {
-
-        let { id } = req.params
-
-
-        if (isNaN(id)) {
-            throw ({ status: 400, message: "id not provided/invalid !" })
-        }
-
-        let data = technologies.filter(technology => technology.id == id)
-
-        if (data.length < 1) {
-            throw ({ status: 404, message: `technology not found for id ${id}` })
-        }
-
-        res.status(200).json({ message: "the tech you were requesting is : ", data })
-
-    } catch (err) {
-        res.status(err.status).json({ message: err.message })
-    }
-}
-
-let getTechnologyByIdFilter = (req, res) => {
-    try {
-        let { id } = req.params;
-
-        if (isNaN(id)) {
-            throw { status: 400, message: "ID must be a number!" };
-        }
-
-        let data = technologies.filter((tech) => tech.id == id);
-
-        if (data.length < 1) {
-            throw { status: 404, message: `No technology found with id ${id}` };
-        }
-
-        res.status(200).json({
-            message: `Technology data for ID: ${id}`,
-            data
-        });
-    } catch (err) {
-        res.status(err.status || 500).json({ message: err.message || "Internal Server Error" });
-    }
-};
-
-
-export {
-    getRandomTechnology,
-    getFiltredTechnologies,
-    getTechnologyBasedOnId,
-    getTechnologyByIdFilter 
-}
+export { getHome, getAbout, getContact, postContact, addEmoji }
