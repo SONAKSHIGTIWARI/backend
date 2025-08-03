@@ -1,18 +1,13 @@
 import express from "express"
-import {
-    getRandomTechnology,
-    getFiltredTechnologies,
-    getTechnologyBasedOnId,
-    getTechnologyByIdFilter
-} from "../controllers/controller.js";
+import { getHome, getAbout, getContact, postContact, addEmoji } from "../../controllers/controller.js"
+let router = express()
 
-let router = express();
+router.get("/", getHome)
+router.get("/about", getAbout)
+router.get("/contact", getContact)
 
-router.get("/random", getRandomTechnology);
+router.post("/contact", postContact)
 
-router.get("/filter", getFiltredTechnologies);
+router.post("/add-emoji", addEmoji)
 
-// Use this for id-based filter route
-router.get("/filterbyid/:id", getTechnologyByIdFilter);
-
-export { router };
+export default router
